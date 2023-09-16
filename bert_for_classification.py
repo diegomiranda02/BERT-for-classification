@@ -11,7 +11,7 @@ from sklearn.model_selection import train_test_split
 
 
 # Read the dataset
-df = pd.read_csv("/content/drive/MyDrive/Projetos/NLP/Sinapses_Classificador/dataset/dataset_gold.csv", sep='#', header=None)
+df = pd.read_csv("dataset.csv", sep='#', header=None)
 df = df.rename(columns={0: 'descrição', 1: "label_text", 2: "text", 3: "Tipo"})
 
 # Function to map Tipo values to integers (case-insensitive)
