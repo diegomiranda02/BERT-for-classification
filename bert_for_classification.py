@@ -1,5 +1,5 @@
 # Install the dependencies
-pip install transformers datasets
+# pip install transformers datasets
 
 # Imports
 import pandas as pd
