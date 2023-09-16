@@ -1,2 +1,2 @@
 # BERT-for-classification
-BERT Fine Tunning for Classification in Brazilian Portuguese Language
+Fine-tuning BERT for classification in the Brazilian Portuguese language
