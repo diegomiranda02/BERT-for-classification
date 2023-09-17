@@ -1,6 +1,6 @@
 [Versão em português](https://github.com/diegomiranda02/BERT-for-classification/blob/main/README_portugues.md)
 
-# CREDITS
+# Credits
 The code for this tutorial is based on a Kaggle Notebook titled "Fine-Tune BERT for Text Classification". Link to the Kaggle Notebook https://www.kaggle.com/code/pritishmishra/fine-tune-bert-for-text-classification?scriptVersionId=116951029
 
 # A Step-by-Step Guide to Text Classification with BERT in TensorFlow
