@@ -1,4 +1,4 @@
-[English Version](https://github.com/diegomiranda02/BERT-for-classification/main/README.md)
+[English Version](https://github.com/diegomiranda02/BERT-for-classification/blob/main/README.md)
 
 ## Créditos
 O código deste tutorial é baseado em um Notebook do Kaggle intitulado "Fine-Tune BERT for Text Classification" (Aperfeiçoamento do BERT para Classificação de Texto). Você pode encontrar o link para o Notebook do Kaggle aqui. Gostaríamos de atribuir o devido crédito ao autor deste Notebook do Kaggle pela valiosa contribuição para a comunidade.
