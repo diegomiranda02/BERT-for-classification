@@ -131,7 +131,7 @@ dataset_encoded.set_format('tf', columns=['input_ids', 'attention_mask', 'token_
 ```
 This prepares the data in a format compatible with TensorFlow.
 
-##Step 10: Mixed Precision Training (Optional)
+## Step 10: Mixed Precision Training (Optional)
 We can enable mixed-precision training for faster model training on compatible hardware:
 
 ```python
@@ -166,7 +166,7 @@ test_dataset = test_dataset.map(order, num_parallel_calls=tf.data.AUTOTUNE)
 ```
 These TensorFlow datasets are what we'll use for training and evaluation.
 
-##Step 12: Building the Classification Model
+## Step 12: Building the Classification Model
 We define our classification model, which consists of the BERT model and a dense layer for class prediction:
 
 ```python
@@ -185,7 +185,7 @@ classifier = BERTForClassification(model, num_classes=6)
 ```
 This model will be trained to classify text into one of six classes.
 
-##Step 13: Compiling and Training the Model
+## Step 13: Compiling and Training the Model
 We compile and train the classification model:
 
 ```python
@@ -211,7 +211,7 @@ classifier.evaluate(test_dataset)
 ```
 This provides us with metrics like accuracy to assess how well the model generalizes to new data.
 
-#Step 15: Making Predictions
+## Step 15: Making Predictions
 Finally, we use our trained model to make predictions on new text data:
 
 ```python
@@ -241,7 +241,7 @@ print("Predicted Class:", predicted_class)
 ```
 This demonstrates how to use your trained model for real-world text classification tasks.
 
-# Dataset
+## Dataset
 The dataset was downloaded from https://www.in.gov.br/acesso-a-informacao/dados-abertos/base-de-dados and processed using the script ---.py and ----.py.
 
 
