@@ -24,7 +24,7 @@ Uma vez que o modelo atingiu um desempenho satisfatório nos dados de validaçã
 
 O algoritmo de classificação baseado em BERT demonstrou bons resultados, alcançando uma acurácia de 0,97 de precisão na categorização de documentos DOU. Isso não apenas economiza tempo e recursos na organização de informações governamentais, mas também facilita a pesquisa e a recuperação de documentos específicos.
 
-# Código com a implementação
+# Implementação
 
 ## Créditos
 O código deste tutorial é baseado em um Notebook do Kaggle intitulado "Fine-Tune BERT for Text Classification". Link para o Notebook do Kaggle [aqui](https://www.kaggle.com/code/pritishmishra/fine-tune-bert-for-text-classification?scriptVersionId=116951029)
