@@ -54,17 +54,16 @@ from sklearn.model_selection import train_test_split
 Essas bibliotecas incluem ferramentas para manipulação de dados, carregamento de modelos BERT, tokenização e muito mais.
 
 ## Passo 3: Ler o Conjunto de Dados
-Supondo que você tenha um conjunto de dados em um arquivo CSV, lemos esse conjunto de dados em um DataFrame do Pandas e realizamos algum pré-processamento de dados:
+Nessa etapa o arquivo 'dataset.csv' é convertido em um DataFrame do Pandas e são renomeadas as colunas:
 
 ```python
 # Ler o conjunto de dados de um arquivo CSV
 df = pd.read_csv("dataset.csv", sep='#', header=None)
 df = df.rename(columns={0: 'descrição', 1: "label_text", 2: "text", 3: "Tipo"})
 ```
-Aqui, supomos que seu conjunto de dados tenha colunas para descrições, rótulos em formato de texto e os próprios dados de texto.
 
 ## Passo 4: Mapear Rótulos para Inteiros
-Precisamos converter os rótulos de texto em valores numéricos. Definimos uma função de mapeamento e a aplicamos para criar uma nova coluna 'label':
+Precisamos converter os rótulos de texto em valores numéricos. Definimos uma função de mapeamento e aplicamos para criar uma nova coluna 'label':
 
 ```python
 # Função para mapear valores do Tipo para inteiros (sem diferenciação de maiúsculas e minúsculas)
@@ -82,10 +81,10 @@ def map_tipo_to_int(tipo):
 # Aplicar a função de mapeamento e criar uma nova coluna 'label'
 df['label'] = df["label_text"].apply(map_tipo_to_int)
 ```
-Isso garante que nossos rótulos estejam em um formato adequado para treinar um modelo de aprendizado de máquina.
+Isso garante que os labels estejam em um formato adequado para treinar um modelo de aprendizado de máquina.
 
 ## Passo 5: Pré-processamento de Dados
-Realizamos algum pré-processamento nos dados de texto, como converter tudo para letras minúsculas e truncar o texto com um comprimento máximo:
+Realizamos o pré-processamento nos dados de texto, como converter tudo para letras minúsculas e truncar o texto com um comprimento máximo:
 
 ```python
 # Converter texto para minúsculas
@@ -95,36 +94,35 @@ df['text'] = df['text'].str.lower()
 # Truncar o texto com um máximo de 128 caracteres
 df['text'] = df['text'].apply(lambda x: truncate_text(x, max_length=128))
 ```
-Essas etapas ajudam a padronizar os dados de texto e gerenciar seu comprimento.
+Essas etapas ajudam a padronizar os dados de texto.
 
 ## Passo 6: Criar Objetos de Conjunto de Dados
-Convertemos nosso DataFrame do Pandas em objetos de Conjunto de Dados:
+Converter o dataframe do pandas para o Dataset da Hugging Face:
 
 ```python
-# Converter DataFrames em objetos de Conjunto de Dados
+# Converter DataFrames em objeto Dataset
 df_dataset = Dataset.from_pandas(df)
 
-# Remover colunas desnecessárias
+# Remover __index_level_0__
 df_dataset = df_dataset.remove_columns('__index_level_0__')
 ```
-Isso nos permite trabalhar de forma eficiente com os dados usando a biblioteca de Conjunto de Dados da Hugging Face.
 
 ## Passo 7: Dividir o Conjunto de Dados
-Dividimos o conjunto de dados em conjuntos de treinamento e teste:
+Divisão em dados de treino e de teste:
 
 ```python
-# Dividir o DataFrame em conjuntos de treinamento e teste (por exemplo, 80% de treinamento, 20% de teste)
+# Dividir o DataFrame em conjuntos de treinamento e teste (80% de treinamento, 20% de teste)
 train_df, test_df = train_test_split(df, test_size=0.2, random_state=42)
 
-# Criar objetos de Conjunto de Dados para treinamento e teste
+# Criar objetos de Dataset para treino e teste
 train_dataset = Dataset.from_pandas(train_df)
 test_dataset = Dataset.from_pandas(test_df)
 
-# Remover colunas desnecessárias
+# Remover __index_level_0__
 train_dataset = train_dataset.remove_columns('__index_level_0__')
 test_dataset = test_dataset.remove_columns('__index_level_0__')
 
-# Combinar conjuntos de dados em um DatasetDict
+# Merge dos datasets em um DatasetDict
 dataset_dict = DatasetDict({
     'train': train_dataset,
     'test': test_dataset,
@@ -133,7 +131,6 @@ dataset_dict = DatasetDict({
 Essa separação garante que tenhamos um conjunto de dados para treinar o modelo e outro para avaliar seu desempenho.
 
 ## Passo 8: Carregar o Modelo BERT e o Tokenizador
-Carregamos o modelo BERT pré-treinado e seu tokenizador correspondente:
 
 ```python
 model = TFAutoModel.from_pretrained("neuralmind/bert-base-portuguese-cased")
@@ -142,7 +139,6 @@ tokenizer = AutoTokenizer.from_pretrained("neuralmind/bert-base-portuguese-cased
 Vamos usar este modelo BERT para classificação de texto pré-treinado na língua portuguesa do Brasil.
 
 ## Passo 9: Tokenização e Codificação
-Tokenizamos e codificamos nossos dados de texto para uso com o modelo BERT:
 
 ```python
 def tokenize(batch):
@@ -154,7 +150,6 @@ dataset_encoded = dataset_dict.map(tokenize, batched=True, batch_size=None)
 # Definir o formato para TensorFlow
 dataset_encoded.set_format('tf', columns=['input_ids', 'attention_mask', 'token_type_ids', 'label'])
 ```
-Isso prepara os dados em um formato compatível com o TensorFlow.
 
 ## Passo 10: Treinamento com Precisão Mista (Opcional)
 Podemos habilitar o treinamento com precisão mista para treinar o modelo mais rapidamente em hardware compatível:
@@ -165,8 +160,7 @@ tf.keras.mixed_precision.set_global_policy(policy)
 ```
 Este é um passo opcional, mas pode acelerar significativamente o treinamento se você tiver o hardware necessário.
 
-## Passo 11: Construir os Conjuntos de Dados do TensorFlow
-Criamos conjuntos de dados do TensorFlow para treinamento e teste:
+## Passo 11: Conjuntos de Dados de treino e teste no formato do TensorFlow
 
 ```python
 BATCH_SIZE = 64
@@ -189,7 +183,6 @@ test_dataset = tf.data.Dataset.from_tensor_slices(dataset_encoded['test'][:])
 test_dataset = test_dataset.batch(BATCH_SIZE)
 test_dataset = test_dataset.map(order, num_parallel_calls=tf.data.AUTOTUNE)
 ```
-Esses conjuntos de dados TensorFlow são o que usaremos para treinamento e avaliação.
 
 ## Passo 12: Construir o Modelo de Classificação
 Definimos nosso modelo de classificação, que consiste no modelo BERT e em uma camada densa para previsão de classe:
@@ -202,16 +195,15 @@ class BERTParaClassificacao(tf.keras.Model):
         self.bert = modelo_bert
         self.fc = tf.keras.layers.Dense(num_classes, activation='softmax')
 
-    def call(self, entradas):
-        x = self.bert(entradas)[1]
+    def call(self, input):
+        x = self.bert(input)[1]
         return self.fc(x)
 
-classificador = BERTParaClassificacao(model, num_classes=6)
+classificador = BERTParaClassificacao(model, num_classes=3)
 ```
-Este modelo será treinado para classificar texto em uma das seis classes.
+Este modelo será treinado para classificar texto em uma das 3 classes: despacho, resolução ou portaria.
 
 ## Passo 13: Compilar e Treinar o Modelo
-Compilamos e treinamos o modelo de classificação:
 
 ```python
 classificador.compile(
@@ -226,10 +218,8 @@ histórico = classificador.fit(
     batch_size=4
 )
 ```
-Este passo envolve a especificação do otimizador, função de perda e métricas para o treinamento.
 
 ## Passo 14: Avaliar o Modelo
-Avaliamos o desempenho do modelo no conjunto de dados de teste:
 
 ```python
 classificador.evaluate(test_dataset)
@@ -237,15 +227,14 @@ classificador.evaluate(test_dataset)
 Isso nos fornece métricas como a precisão para avaliar o quão bem o modelo generaliza para novos dados.
 
 ## Passo 15: Fazer Previsões
-Finalmente, usamos nosso modelo treinado para fazer previsões em novos dados de texto:
 
 ```python
 texto_de_entrada = "Processo nº 48500.003134/2012-10. Interessado: Migratio Gestão e Comercialização de Energia Elétrica Ltda. Decisão: Autorizar a empresa Migratio Gestão e Comercialização de Energia Elétrica Ltda., inscrita no CNPJ/MF sob nº 15.458.171/0001-36, a atuar como Agente Comercializador de Energia Elétrica no âmbito da CCEE; informar que a atividade poderá ser exercida por meio de sua filial, CNPJ/MF sob nº 15.458.171/0002-17."
 
-# Tokenizar e pré-processar a instância de entrada
+# Tokenizar e pré-processar o texto 
 tokens_de_entrada = tokenizer(texto_de_entrada, padding=True, truncation=True)
 
-# Tokenizar e pré-processar o texto de entrada
+# Tokenizar e pré-processar o texto
 input_ids = tokens_de_entrada['input_ids']
 attention_mask = tokens_de_entrada['attention_mask']
 token_type_ids = tokens_de_entrada['token_type_ids']
