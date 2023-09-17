@@ -1,5 +1,31 @@
 [English Version](https://github.com/diegomiranda02/BERT-for-classification/blob/main/README.md)
 
+Desenvolvimento de um Algoritmo de Classificação em BERT para Documentos do Diário Oficial da União
+
+No contexto da gestão eficiente de informações governamentais, a classificação de documentos é uma tarefa crucial. No âmbito do Diário Oficial da União (DOU), uma das publicações oficiais mais importantes do governo brasileiro, a categorização adequada de conteúdo, como despachos, portarias e resoluções, é essencial para a organização e recuperação eficaz dessas informações. Este texto descreve o processo de desenvolvimento de um algoritmo de classificação baseado na arquitetura Transformer, utilizando o modelo BERT, para automatizar a categorização de documentos no DOU.
+
+1. Coleta e Preparação de Dados
+
+O primeiro passo nesse processo foi a coleta de um conjunto de dados do DOU, contendo despachos, portarias e resoluções. Os textos dos documentos passaram por uma etapa de pré-processamento e após esse processo foi realizada a tokenização.
+
+2. Modelo BERT e Transfer Learning
+
+Foi utilizada a arquitetura Transformer, especificamente o modelo BERT (Bidirectional Encoder Representations from Transformers), que é amplamente reconhecido por sua capacidade de capturar informações contextuais em texto. Foi realizado o treinamento do BERT no conjunto de dados, empregando técnicas de transfer learning. Isso permitiu aproveitar o conhecimento prévio do BERT em relação à linguagem e, em seguida, especializar o modelo para a tarefa específica de classificação de documentos do DOU.
+
+3. Treinamento e Avaliação do Modelo
+
+O conjunto de dados foi dividio em treinamento e teste. O modelo BERT foi treinado para aprender a relação entre os textos e suas respectivas categorias (despachos, portarias e resoluções). Durante o treinamento, foram ajustados os hiperparâmetros e a métrica acurácia.
+
+4. Implementação e Implantação
+
+Uma vez que o modelo atingiu um desempenho satisfatório nos dados de validação, foi implementado em um sistema de classificação automatizada de documentos DOU. Este sistema é capaz de processar novos documentos e categorizá-los de forma eficaz em uma das três categorias desejadas.
+
+5. Resultados e Benefícios
+
+O algoritmo de classificação baseado em BERT demonstrou bons resultados, alcançando uma acurácia de 0,97 de precisão na categorização de documentos DOU. Isso não apenas economiza tempo e recursos na organização de informações governamentais, mas também facilita a pesquisa e a recuperação de documentos específicos.
+
+# Código com a implementação
+
 ## Créditos
 O código deste tutorial é baseado em um Notebook do Kaggle intitulado "Fine-Tune BERT for Text Classification". Link para o Notebook do Kaggle [aqui](https://www.kaggle.com/code/pritishmishra/fine-tune-bert-for-text-classification?scriptVersionId=116951029)
 
