@@ -130,7 +130,7 @@ dataset_encoded.set_format('tf', columns=['input_ids', 'attention_mask', 'token_
 ```
 Isso prepara os dados em um formato compatível com o TensorFlow.
 
-##Passo 10: Treinamento com Precisão Mista (Opcional)
+## Passo 10: Treinamento com Precisão Mista (Opcional)
 Podemos habilitar o treinamento com precisão mista para treinar o modelo mais rapidamente em hardware compatível:
 
 ```python
