@@ -1,7 +1,7 @@
 [English Version](https://github.com/diegomiranda02/BERT-for-classification/blob/main/README.md)
 
 ## Créditos
-O código deste tutorial é baseado em um Notebook do Kaggle intitulado "Fine-Tune BERT for Text Classification" (Aperfeiçoamento do BERT para Classificação de Texto). Você pode encontrar o link para o Notebook do Kaggle aqui. Gostaríamos de atribuir o devido crédito ao autor deste Notebook do Kaggle pela valiosa contribuição para a comunidade.
+O código deste tutorial é baseado em um Notebook do Kaggle intitulado "Fine-Tune BERT for Text Classification" (Aperfeiçoamento do BERT para Classificação de Texto). Link para o Notebook do Kaggle [aqui](https://www.kaggle.com/code/pritishmishra/fine-tune-bert-for-text-classification?scriptVersionId=116951029)
 
 ## Um Guia Passo a Passo para Classificação de Texto com BERT no TensorFlow
 Este artigo demonstra um guia passo a passo sobre como realizar a classificação de texto usando BERT, um poderoso modelo de linguagem pré-treinado, e o TensorFlow. Ao final deste guia, você será capaz de classificar texto em diferentes categorias com base em sua tarefa específica.
