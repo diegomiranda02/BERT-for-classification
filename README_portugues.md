@@ -253,7 +253,7 @@ classe_prevista = np.argmax(previsões, axis=-1)[0]
 # Imprimir a classe prevista
 print("Classe Prevista:", classe_prevista)
 ```
-Isso demonstra como usar seu modelo treinado para tarefas reais de classificação de texto.
+Isso demonstra como usar o modelo treinado para tarefas reais de classificação de texto.
 
 Conjunto de Dados
 O conjunto de dados foi baixado em https://www.in.gov.br/acesso-a-informacao/dados-abertos/base-de-dados e processado usando os scripts ---.py e ----.py.
