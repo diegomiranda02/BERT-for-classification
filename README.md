@@ -70,6 +70,10 @@ df['label_text'] = df['label_text'].str.lower()
 df['text'] = df['text'].str.lower()
 
 # Truncate text to a maximum of 128 characters
+
+def truncate_text(text, max_length):
+    return text[:max_length]
+
 df['text'] = df['text'].apply(lambda x: truncate_text(x, max_length=128))
 ```
 These steps help standardize the text data and manage its length.
